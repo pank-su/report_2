@@ -1,0 +1,51 @@
+@startuml
+node "kotlin ROS2 library"{
+   package "krosbridge-code-gen"{
+      [GradlePlugin.kt]
+      [Messages.kt] --> [Parser.kt]
+      [Parser.kt] --> [Writer.kt]
+      [Writer.kt] --> [GradlePlugin.kt]
+   }
+
+   package "krosbridge"{
+      [ROS.kt]
+      package "action" 
+      package "topic"
+      package "service"
+      package "rosmessages"
+      action --> ROS.kt
+      service --> ROS.kt
+      topic --> ROS.kt
+      rosmessages --> ROS.kt
+   }
+   "krosbridge-code-gen" --> "krosbridge"
+}
+node "ROS 2"{
+   [map_helper] --> [map_server]
+   [map_server] --> [Robot]
+   [Robot] --> [map_server]
+}
+
+ROS.kt --> "ROS 2"
+
+node "map_kmp"{
+   package "commonMain"{
+      [App.kt]
+      [Platform.kt]
+package "ui"{
+      package "screens"{
+      [MainScreen] --> [App.kt]
+
+   }
+      package "components"{
+      [MapView.kt] --> [App.kt]
+   }
+}
+   }
+   [androidMain] --> "commonMain"
+   [desktopMain] --> "commonMain"
+   [wasmJsMain] --> "commonMain"
+}
+
+"map_kmp" --> "kotlin ROS2 library"
+@enduml

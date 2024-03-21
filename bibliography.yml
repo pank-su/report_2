@@ -1,0 +1,75 @@
+kmp:
+    type: Web
+    title: Что такое Kotlin Multiplatform?
+    url: 
+        value: https://kotlinlang.org/docs/multiplatform.html#kotlin-multiplatform-use-cases
+        date: 2024-03-01
+
+jetpack-compose:
+    type: Book
+    title: Jetpack Compose by Tutorials
+    author: Kodeco Team
+            Denis Buketa
+            Prateek Prasad
+    page-total: 463
+    publisher: Paperback
+    date: 2023-03-29
+    edition: 2
+    serial: 'ISBN: 978-1950325832'
+    language: en
+
+ros2:
+    type: Web
+    title: Документация ROS2
+    url: 
+        value: https://docs.ros.org/en/humble/index.html
+        date: 2024-03-01
+
+rosbridge:
+    type: Web
+    title: Документация ROSbridge
+    url: 
+        value: https://github.com/RobotWebTools/rosbridge_suite
+        date: 2024-03-01
+
+kotlin:
+    type: Web
+    title: Документация языка программирования Kotlin
+    url: 
+        value: https://kotlinlang.org/docs/home.html
+        date: 2024-03-01
+
+idea:
+    type: Web
+    title: IntelliJ IDEA — ведущая IDE для разработки на Java и Kotlin
+    url: 
+        value: https://www.jetbrains.com/idea/
+        date: 2024-03-01
+
+kotlin-rosbridge:
+    type: Web
+    title: Библиотека кодогенерации для РОСа
+    url:
+        value: https://github.com/thoebert/krosbridge-codegen
+        date: 2024-03-01
+
+python:
+    type: Web
+    title: Что такое Python?
+    url:
+        value: https://www.python.org
+        date: 2024-03-01
+
+flask:
+    type: Web
+    title: Документация Flask
+    url:
+        value: https://flask.palletsprojects.com/en/3.0.x/
+        date: 2024-03-01
+
+emacs:
+    type: Web
+    title: Emacs - текстовый редактор
+    url:
+        value: https://www.gnu.org/software/emacs/
+        date: 2024-03-01
