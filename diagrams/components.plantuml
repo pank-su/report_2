@@ -1,4 +1,5 @@
 @startuml
+
 node "kotlin ROS2 library"{
    package "krosbridge-code-gen"{
       [GradlePlugin.kt]
@@ -34,11 +35,16 @@ node "map_kmp"{
       [Platform.kt]
 package "ui"{
       package "screens"{
-      [MainScreen] --> [App.kt]
+      [MainScreen.kt] --> [App.kt]
+      [MainScreenModel.kt] --> [MainScreen.kt]
+      [MainScreenState.kt] --> [MainScreenModel.kt]
+
 
    }
       package "components"{
-      [MapView.kt] --> [App.kt]
+      [MapView.kt] --> [MainScreen.kt]
+      [MapState.kt] --> [MapView.kt]
+      [MapControllers.kt] --> [MapView.kt]
    }
 }
    }
@@ -48,4 +54,5 @@ package "ui"{
 }
 
 "map_kmp" --> "kotlin ROS2 library"
+"map_kmp" --> map_helper
 @enduml
