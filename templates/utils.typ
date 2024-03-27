@@ -42,7 +42,7 @@
 }
 
 // Код всех файлов из json (созданный утилитой tree)
-#let allFiles(files, language: "kotlin", path: "/src/YandexMusic3/composeApp/") = {
+#let allFiles(files, language: "kotlin", path: "/src/") = {
   if files.type == "file"{ 
     text( [ \ ] )
     text(files.name )

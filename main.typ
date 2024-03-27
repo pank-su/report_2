@@ -228,35 +228,230 @@ Jetpack Compose - это современная библиотека для ра
 
 = Тестирование и отладка программных модулей
 
-Для более простой работы с модулей map_helper, были написаны UNIT-тесты для проверки корректной роботоспособности модуля. Код unit-тестов представлен в приложении Б.
+Тестирование программного обеспечения - это метод контроля качества ПО, направленный на:
 
+| Выявление и исправление ошибок: поиск и устранение дефектов, влияющих на функциональность, производительность и безопасность ПО;
+
+| Подтверждение соответствия требованиям: проверка соответствия ПО спецификациям, техническим заданиям и ожиданиям пользователей;
+
+| Оценка надежности и производительности: измерение и анализ показателей производительности, таких как скорость работы, время отклика и потребление ресурсов.
+
+
+В ходе интеграции, для более простой работы с модулем map_helper, были написаны UNIT-тесты для проверки корректной роботоспособности модуля. Код unit-тестов представлен в приложении Б.
+На рисунке @complete представлено прохождение всех тестов.
+
+#figure(
+    image(ip("test_complete.png")),
+    caption: "Пройденные тесты"
+) <complete>
+
+В ходе создании и его последующей интеграции модуля map_kmp, было проведено ручное тестирование. 
+Аннотация к тестам приведена в таблице @anotation2.
+
+#figure(
+	table(columns: (1fr, 1fr),
+	[Название проекта],[map_kmp],
+	[Рабочая версия],[0.1],
+	[Имя тестирующего], [Панков Василий Дмитриевич],
+	[Дата теста], [27.03.2024]
+	),
+	caption: "Аннотация к тестам MapHelper",
+) <anotation2>
+
+Тесты приложения "MapHelper" представлены в таблице @tests2.
+
+#pagebreak()
+
+#figure(
+    table(columns: (1.2fr, 1.3fr, 2fr, 3fr, 1.7fr, 1.7fr, 1.4fr),
+	table.header([Тестовый пример №], [Приоритет тестирования], [Краткое изложение теста], 
+	    [Этапы теста], [Ожидаемый результат], [Фактический результат], [Статус]),
+	[ТП-01], [Высокий], [Запуск приложения на всех операционных системах], [
+	    -- Запуск приложения на Android;
+		
+	    -- Запуск приложения на Linux;
+	    
+	    -- Запуск приложения в веб.
+	],[Отображение карты на всех устройствах, как на рисунке @map_on_device],[Отображение карты на всех устройствах, как на рисунке @map_on_device],[Пройден],
+	[ТП-02],[Средний] ,[Корректное обновление карты при её изменение на сервере], [Сменить карту с помощью map_helper], [Отображение карты на которую сменили], [Отображение карты на которую сменили], [Пройден],
+	[ТП-03], [Высокий], [Перемещение с помощью жеста], [Потянуть за карту и переместить на определённый промежуток], [Перемещение на указанный промежуток], [Перемещение на указанный промежуток], [Пройден],
+	[ТП-04], [Высокий],[Приближение карты с помощью двух жестов], [Приближение с помощью стандартного жеста двумя пальцами или с помощью колеса прокрутки], [Приближение на указанное расстояние],[Приближение на указанное расстояние],[Пройден],
+	[ТП-05],
+	[Средний],
+	[Поворот карты с помощью жестов], 
+	[
+	    Повернуть карту с помощью жеста (двумя пальцами) или с помощью зажатия левой кнопки мыша
+	],
+	[Поворот в заданном направлении],
+	[Поворот в заданном направлении],
+	[Пройден],
+	[ТП-06],
+	[Высокий],
+	[Корректное вычисление масштаба], 
+	[
+	    -- Загрузить карту с меткой в один метр;
+	    -- Изменить масштаб на один метр;
+	],
+	[Линейка масштаба чётко совпадает с меткой],
+	[Линейка масштаба чётко совпадает с меткой],
+	[Пройден]
+	),
+	caption: "Проведённые ручные тесты над модулем map_kmp",
+) <tests2>
+
+#figure(
+    image(ip("map_on_device.jpg"), height: 90%),
+    caption: "Пройденные тесты"
+) <map_on_device>
 
 #ch("Заключение")
 
+В ходе производственной практики был разработан и успешно интегрирован программный модуль для работы с картой "map_server" в системе ROS2, чей код представлен в приложении А. Полученный опыт включает в себя не только разработку, но и тестирование данного модуля, осуществленное с применением разнообразных подходов и инструментов, включая модульное тестирование с использованием языка программирования Kotlin, а также ручное тестирование функциональности созданного модуля.
 
+В перспективе планируется дальнейшее развитие системы с добавлением функционала по загрузке карты напрямую через приложение, что позволит значительно расширить возможности и удобство использования системы. Этот процесс потребует дальнейшей работы над модулем, его оптимизацию и адаптацию к новым требованиям, что представляет собой интересный вызов для дальнейшего профессионального развития.
 
 
 #ch("Список использованных источников")
 
 #bibliography("bibliography.yml", title: none, full: true, style: "gost-r-705-2008-numeric")
 
-#chn([ПРИЛОЖЕНИЕ А Листинг разработанной библиотеки])
-
-Parser.kt
+#chn([ПРИЛОЖЕНИЕ А Листинг разработанного модуля])
 
 #show raw: set text(hyphenate: false, size: 10pt)
 #show raw: set par(justify: false, leading: 1em, first-line-indent: 0em)
+
+androidMain/kotlin/Platform.android.kt
+
+#raw(read("./src/app/androidMain/kotlin/Platform.android.kt"), lang: "kotlin")
+
+
+androidMain/kotlin/utils/ImageManipulations.android.kt
+
+#raw(read("src/app/androidMain/kotlin/utils/ImageManipulations.android.kt"), lang: "kotlin")
+
+
+androidMain/kotlin/utils/Modifiers.android.kt
+
+#raw(read("src/app/androidMain/kotlin/utils/Modifiers.android.kt"), lang: "kotlin")
+
+androidMain/kotlin/su/pank/rmsui/MainActivity.kt
+
+#raw(read("src/app/androidMain/kotlin/su/pank/rmsui/MainActivity.kt"), lang: "kotlin")
+
+commonMain/kotlin/App.kt
+
+#raw(read("src/app/commonMain/kotlin/App.kt"), lang: "kotlin")
+
+commonMain/kotlin/Platform.kt
+
+#raw(read("src/app/commonMain/kotlin/Platform.kt"), lang: "kotlin")
+
+commonMain/kotlin/utils/ImageManipulations.kt
+
+#raw(read("src/app/commonMain/kotlin/utils/ImageManipulations.kt"), lang: "kotlin")
+
+commonMain/kotlin/utils/KoinIntegration.kt
+
+#raw(read("src/app/commonMain/kotlin/utils/KoinIntegration.kt"), lang: "kotlin")
+
+commonMain/kotlin/utils/Modifiers.kt
+
+#raw(read("src/app/commonMain/kotlin/utils/Modifiers.kt"), lang: "kotlin")
+
+commonMain/kotlin/ui/components/map/MapControllers.kt
+
+#raw(read("src/app/commonMain/kotlin/ui/components/map/MapControllers.kt"), lang: "kotlin")
+
+commonMain/kotlin/ui/components/map/MapState.kt
+
+#raw(read("src/app/commonMain/kotlin/ui/components/map/MapState.kt"), lang: "kotlin")
+
+commonMain/kotlin/ui/components/map/MapView.kt
+
+#raw(read("src/app/commonMain/kotlin/ui/components/map/MapView.kt"), lang: "kotlin")
+
+commonMain/kotlin/ui/di/uiModule.kt
+
+#raw(read("src/app/commonMain/kotlin/ui/di/uiModule.kt"), lang: "kotlin")
+
+commonMain/kotlin/ui/screens/main/MainScreen.kt
+
+#raw(read("src/app/commonMain/kotlin/ui/screens/main/MainScreen.kt"), lang: "kotlin")
+
+commonMain/kotlin/ui/screens/main/MainScreenModel.kt
+
+#raw(read("src/app/commonMain/kotlin/ui/screens/main/MainScreenModel.kt"), lang: "kotlin")
+
+commonMain/kotlin/domain/di/domainModule.kt
+
+#raw(read("src/app/commonMain/kotlin/domain/di/domainModule.kt"), lang: "kotlin")
+
+commonMain/kotlin/domain/SetImageColorsUseCase.kt
+
+#raw(read("src/app/commonMain/kotlin/domain/SetImageColorsUseCase.kt"), lang: "kotlin")
+
+commonMain/kotlin/data/RosClient.kt
+
+#raw(read("src/app/commonMain/kotlin/data/RosClient.kt"), lang: "kotlin")
+
+commonMain/kotlin/data/MapHelperRepository.kt
+
+#raw(read("src/app/commonMain/kotlin/data/MapHelperRepository.kt"), lang: "kotlin")
+
+commonMain/kotlin/data/MapLoaderRepository.kt
+
+#raw(read("src/app/commonMain/kotlin/data/MapLoaderRepository.kt"), lang: "kotlin")
+
+commonMain/kotlin/data/model/MapDTO.kt
+
+#raw(read("src/app/commonMain/kotlin/data/model/MapDTO.kt"), lang: "kotlin")
+
+commonMain/kotlin/data/model/ErrorDTO.kt
+
+#raw(read("src/app/commonMain/kotlin/data/model/ErrorDTO.kt"), lang: "kotlin")
+
+commonMain/kotlin/data/di/dataModule.kt
+
+#raw(read("src/app/commonMain/kotlin/data/di/dataModule.kt"), lang: "kotlin")
+
+desktopMain/kotlin/Platform.jvm.kt
+
+#raw(read("src/app/desktopMain/kotlin/Platform.jvm.kt"), lang: "kotlin")
+
+desktopMain/kotlin/main.kt
+
+#raw(read("src/app/desktopMain/kotlin/main.kt"), lang: "kotlin")
+
+desktopMain/kotlin/utils/Modifiers.desktop.kt
+
+#raw(read("src/app/desktopMain/kotlin/utils/Modifiers.desktop.kt"), lang: "kotlin")
+
+nonAndroidMain/kotlin/utils/ImageManipulations.nonAndroid.kt
+
+#raw(read("src/app/nonAndroidMain/kotlin/utils/ImageManipulations.nonAndroid.kt"), lang: "kotlin")
+
+wasmJsMain/kotlin/utils/Modifiers.wasmJs.kt
+
+#raw(read("src/app/wasmJsMain/kotlin/utils/Modifiers.wasmJs.kt"), lang: "kotlin")
+
+wasmJsMain/kotlin/Platform.wasmJs.kt
+
+#raw(read("src/app/wasmJsMain/kotlin/Platform.wasmJs.kt"), lang: "kotlin")
+
+wasmJsMain/kotlin/main.kt
+
+#raw(read("src/app/wasmJsMain/kotlin/main.kt"), lang: "kotlin")
+
 // #raw(read("./src/lib/Parser.kt"), lang: "kotlin")
 \
 
 //#allFiles(json("src/app.json").at(0)) 
 
 
-
 #chn([ПРИЛОЖЕНИЕ Б Листинг разработанных UNIT-тестов])
 
-#show raw: set text(hyphenate: false, size: 10pt)
-#show raw: set par(justify: false, leading: 1em, first-line-indent: 0em)
+// #show raw: set text(hyphenate: false, size: 10pt)
+// #show raw: set par(justify: false, leading: 1em, first-line-indent: 0em)
 
 
 MapHelperTest.kt
@@ -270,3 +465,4 @@ MapDTO.kt
 ErrorDTO.kt
 
 #raw(read("./src/tests/ErrorDTO.kt"), lang: "kotlin")
+

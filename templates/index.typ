@@ -36,7 +36,9 @@
   show table: set text(hyphenate: true)
   show table: set par(justify: false, leading: 0.3em, first-line-indent: 0em)
 
-  set figure(supplement: "Рисунок")
+  show figure.where(kind: image): set figure(supplement: "Рисунок")
+  show figure.where(kind: table): set figure(supplement: "Таблица")
+
 
   //set figure(supplement: "Рисунок")
   show figure.where(kind: table): set figure.caption(position:  top)

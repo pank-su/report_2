@@ -16,15 +16,12 @@ import io.ktor.serialization.kotlinx.json.*
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
 
-class MapHelperTests{
-
-}
 
 /** Последовательные тесты MapHelper
  * @author Панков Вася
  */
 class MapHelperTest : FunSpec({
-    val url = "http://127.0.0.1:5000"
+    val url = "http://0.0.0.0:5000"
     val client = HttpClient() {
         install(ContentNegotiation) {
             json()
@@ -53,7 +50,6 @@ free_thresh: 0.4
 
     context("correct data"){
 
-
         test("check port and other configuration and list clear") {
             val response = client.get("$url/all_maps")
             response shouldHaveStatus HttpStatusCode.OK
@@ -74,10 +70,10 @@ free_thresh: 0.4
                 append(
                     "params", correctParams
                 )
-                MapHelperTest::class.java.getResource("polygon.pgm")?.let {
+                MapHelperTest::class.java.getResource("polygon.png")?.let {
                     append("map", it.readBytes(), Headers.build {
                         append(HttpHeaders.ContentType, ContentType.Image.Any)
-                        append(HttpHeaders.ContentDisposition, "filename=\"map.pgm\"")
+                        append(HttpHeaders.ContentDisposition, "filename=\"map.png\"")
 
                     })
                 }
@@ -91,7 +87,7 @@ free_thresh: 0.4
             val imageResponse = client.get("$url/image/${mapName}")
 
             imageResponse shouldHaveStatus HttpStatusCode.OK
-            imageResponse.body() as ByteArray shouldBe MapHelperTest::class.java.getResource("polygon.pgm")!!.readBytes()
+            imageResponse.body() as ByteArray shouldBe MapHelperTest::class.java.getResource("polygon.png")!!.readBytes()
 
         }
 
@@ -123,10 +119,10 @@ free_thresh: 0.4
                 append(
                     "params", correctParams
                 )
-                MapHelperTest::class.java.getResource("polygon.pgm")?.let {
+                MapHelperTest::class.java.getResource("polygon.png")?.let {
                     append("map", it.readBytes(), Headers.build {
                         append(HttpHeaders.ContentType, ContentType.Image.Any)
-                        append(HttpHeaders.ContentDisposition, "filename=\"map.pgm\"")
+                        append(HttpHeaders.ContentDisposition, "filename=\"map.png\"")
 
                     })
                 }
@@ -142,10 +138,18 @@ free_thresh: 0.4
             maps2.map { it.name } shouldBe listOf(mapName, mapName2)
         }
 
-        test("get selected map 2"){
-            val selectedMapResponse = client.get("$url/selected_map")
+        test("get selected map with two maps"){
+            var selectedMapResponse = client.get("$url/selected_map")
             selectedMapResponse shouldHaveStatus HttpStatusCode.OK
             selectedMapResponse.body<MapDTO>().name shouldBe mapName2
+
+            val selectMapResponse = client.get("$url/select_map/${mapName}")
+            selectMapResponse shouldHaveStatus HttpStatusCode.OK
+            selectMapResponse.body<MapDTO>().name shouldBe mapName
+
+            selectedMapResponse = client.get("$url/selected_map")
+            selectedMapResponse shouldHaveStatus HttpStatusCode.OK
+            selectedMapResponse.body<MapDTO>().name shouldBe mapName
         }
     }
 
@@ -179,7 +183,7 @@ free_thresh: 0.4
 
 
 
-        test("select incorrect map") {
+        test("get incorrect map") {
             val imageResponse = client.get("$url/image/bladsfd")
             imageResponse shouldHaveStatus HttpStatusCode.BadRequest
             imageResponse.body<ErrorDTO>() shouldBe ErrorDTO("Map not found")
@@ -187,6 +191,12 @@ free_thresh: 0.4
             val yamlResponse = client.get("$url/yaml/bladsfd")
             yamlResponse shouldHaveStatus HttpStatusCode.BadRequest
             yamlResponse.body<ErrorDTO>() shouldBe ErrorDTO("Map not found")
+        }
+
+        test("select incorrect map") {
+            val imageResponse = client.get("$url/select_map/bladsfd")
+            imageResponse shouldHaveStatus HttpStatusCode.BadRequest
+            imageResponse.body<ErrorDTO>() shouldBe ErrorDTO("Map not found")
         }
     }
 
